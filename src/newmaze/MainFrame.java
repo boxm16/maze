@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -20,20 +21,27 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class MainFrame extends javax.swing.JFrame {
 
     Place place;
+    Place place1;
 
     private Timer timer;
+    private Timer arrayTimer;
+    ArrayList<Place> arrayList;
 
     public MainFrame() {
         initComponents();
 
         timer = new Timer(50, new TimerAction());
         place = new Place();
+        place1 = new Place();
 
         jTable1.setGridColor(Color.blue);
         jTable1.setShowHorizontalLines(true);
         jTable1.setShowVerticalLines(true);
 
         jTable1.setDefaultRenderer(Object.class, myRenderer);
+
+        arrayTimer = new Timer(50, new ArrayTimerAction());
+        arrayList = new ArrayList();
 
     }
 
@@ -56,6 +64,9 @@ public class MainFrame extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,7 +98,7 @@ public class MainFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18", "Title 19", "Title 20"
             }
         ));
-        jTable1.setRowHeight(44);
+        jTable1.setRowHeight(43);
         jScrollPane1.setViewportView(jTable1);
 
         jButton2.setText("CLEAR PATH");
@@ -104,7 +115,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("START");
+        jButton1.setText("STUPID");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -118,16 +129,37 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("jButton5");
+        jButton5.setText("Recursion");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("X");
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setText("Y");
+
+        jButton6.setText("NOOB");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("SMART");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("FORGET");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,50 +168,58 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 411, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(18, 18, 18)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(192, 192, 192))
+                .addGap(59, 59, 59))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3)
-                        .addComponent(jButton4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -223,6 +263,25 @@ public class MainFrame extends javax.swing.JFrame {
         findPath(0, 0);   // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        arrayList = new ArrayList();
+
+        place1.setX(0);
+        place1.setY(0);
+        arrayTimer.start();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        for (Place place : arrayList) {
+            jTable1.setValueAt("0", place.getX(), place.getY());
+
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        arrayList.clear();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -264,6 +323,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -271,10 +333,187 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
-    class TimerAction implements ActionListener {
+    class ArrayTimerAction implements ActionListener {
 
-        public TimerAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            move(place1);
+
         }
+
+        private void move(Place place1) {
+            if (canGoSouth(place1)) {
+                moveSouth(place1);
+            } else {
+                if (canGoNorth(place1)) {
+                    moveNorth(place1);
+                } else {
+                    if (canGoWest(place1)) {
+                        moveWest(place1);
+                    } else {
+                        if (canGoEast(place1)) {
+                            moveEast(place1);
+                        } else {
+                            moveBack(place1);
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private void moveBack(Place place1) {
+
+            jTable1.setValueAt("+", place1.getX(), place1.getY());
+            if (arrayList.size() > 1) {
+                arrayList.remove(arrayList.size() - 1);
+                Place p = arrayList.get(arrayList.size() - 1);
+
+                place1.setX(p.getX());
+                place1.setY(p.getY());
+                System.out.println("moving back to" + place1.getX() + ":" + place1.getY());
+            } else {
+                arrayTimer.stop();
+                System.out.println("ARRAY LIST IS EMPTY-I`m Back where i was");
+            }
+        }
+
+        private boolean canGoSouth(Place place1) {
+            int x = place1.getX();
+            int y = place1.getY();
+            if (x + 1 > jTable1.getModel().getRowCount() - 1) {
+                // System.out.println("X=:"+x);
+                return false;
+            } else {
+
+                return canGo(x + 1, y);
+            }
+
+        }
+
+        private boolean canGoWest(Place place1) {
+
+            int y = place1.getY();
+            if (y + 1 > jTable1.getModel().getColumnCount() - 1) {
+                // System.out.println("Y=:"+y);
+                return false;
+            } else {
+
+                return canGo(place1.getX(), y + 1);
+            }
+
+        }
+
+        private boolean canGoNorth(Place place1) {
+            int x = place1.getX();
+
+            if (x - 1 < 0) {
+                return false;
+            } else {
+
+                return canGo(x - 1, place1.getY());
+            }
+
+        }
+
+        private boolean canGoEast(Place place1) {
+
+            int y = place1.getY();
+            if (y - 1 < 0) {
+                return false;
+            } else {
+
+                return canGo(place1.getX(), y - 1);
+            }
+
+        }
+
+        private void moveSouth(Place place1) {
+            int x = place1.getX();
+            int y = place1.getY();
+
+            place1.setX(x + 1);
+
+            Place p = new Place();
+            p.setX(place1.getX());
+            p.setY(place1.getY());
+            jTable1.setValueAt("0", place1.getX(), place1.getY());
+            arrayList.add(p);
+            System.out.println("moving south to:" + place1.getX() + ":" + place1.getY());
+        }
+
+        private void moveWest(Place place1) {
+            int x = place1.getX();
+            int y = place1.getY();
+
+            place1.setY(y + 1);
+
+            Place p = new Place();
+            p.setX(place1.getX());
+            p.setY(place1.getY());
+
+            jTable1.setValueAt("0", place1.getX(), place1.getY());
+
+            arrayList.add(p);
+            System.out.println("moving west to:" + place1.getX() + ":" + place1.getY());
+        }
+
+        private void moveNorth(Place place1) {
+            int x = place1.getX();
+            int y = place1.getY();
+
+            place1.setX(x - 1);
+
+            Place p = new Place();
+            p.setX(place1.getX());
+            p.setY(place1.getY());
+
+            jTable1.setValueAt("0", place1.getX(), place1.getY());
+            arrayList.add(p);
+            System.out.println("moving north to:" + place1.getX() + ":" + place1.getY());
+        }
+
+        private void moveEast(Place place1) {
+            int x = place1.getX();
+            int y = place1.getY();
+
+            place1.setY(y - 1);
+
+            Place p = new Place();
+            p.setX(place1.getX());
+            p.setY(place1.getY());
+
+            jTable1.setValueAt("0", place1.getX(), place1.getY());
+            arrayList.add(p);
+            System.out.println("moving east to:" + place1.getX() + ":" + place1.getY());
+        }
+
+        private boolean canGo(int x, int y) {
+
+            Object mark = jTable1.getModel().getValueAt(x, y);
+            if (mark == null) {
+                System.out.println(x + ":" + y + "CAN GO");
+                return true;
+            } else {
+                String markS = mark.toString();
+                if (markS.equals("")) {
+                    System.out.println(x + ":" + y + "CAN GO");
+                    return true;
+                } else if (markS.equals("G")) {
+                    System.out.println("ARRIVED");
+                    arrayTimer.stop();
+                    return true;
+                } else {
+                    System.out.println(x + ":" + y + "CAN NOT GO");
+                    return false;
+                }
+
+            }
+        }
+
+    }
+
+    class TimerAction implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -317,12 +556,6 @@ public class MainFrame extends javax.swing.JFrame {
 
                 }
             }
-        }
-
-        private void moveOldSpot(Place place) {
-            System.out.println("going back");
-            timer.stop();
-
         }
 
         private boolean canGoSouth(Place place) {
@@ -612,9 +845,6 @@ public class MainFrame extends javax.swing.JFrame {
         return (x < 0 || x > jTable1.getRowCount() - 1 || y < 0 || y > jTable1.getColumnCount() - 1);
     }
 
-    
-    
-    
     DefaultTableCellRenderer myRenderer = new DefaultTableCellRenderer() {
         @Override
         public Component getTableCellRendererComponent(JTable table,
