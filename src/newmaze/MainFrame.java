@@ -25,6 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private Timer timer;
     private Timer arrayTimer;
+    private Timer smartCounterTimer;
     ArrayList<Place> arrayList;
 
     public MainFrame() {
@@ -42,6 +43,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         arrayTimer = new Timer(50, new ArrayTimerAction());
         arrayList = new ArrayList();
+
+        smartCounterTimer = new Timer(100, new SmartCounterTimerAction());
 
     }
 
@@ -67,6 +70,8 @@ public class MainFrame extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,9 +141,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("X");
+        jTextField1.setText("0");
 
-        jTextField2.setText("Y");
+        jTextField2.setText("0");
 
         jButton6.setText("NOOB");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +166,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("X");
+
+        jLabel2.setText("Y");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,7 +189,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -202,7 +215,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -264,18 +279,19 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        arrayList = new ArrayList();
+        arrayList.clear();
 
-        place1.setX(0);
-        place1.setY(0);
+        int x = Integer.parseInt(jTextField1.getText());
+        int y = Integer.parseInt(jTextField1.getText());
+        jTable1.setValueAt("S", x, y);
+        place1.setX(x);
+        place1.setY(y);
         arrayTimer.start();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        for (Place place : arrayList) {
-            jTable1.setValueAt("0", place.getX(), place.getY());
-
-        }
+        smartCounter = 0;
+        smartCounterTimer.start();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -326,12 +342,37 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
+    private int smartCounter = 0;
+
+    class SmartCounterTimerAction implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            smartMove(smartCounter);
+
+        }
+
+        private void smartMove(int counter) {
+
+            if (smartCounter < arrayList.size() - 1) {
+                Place place = arrayList.get(counter);
+                jTable1.setValueAt("0", place.getX(), place.getY());
+                smartCounter++;
+            } else {
+                smartCounterTimer.stop();
+            }
+        }
+
+    }
 
     class ArrayTimerAction implements ActionListener {
 
@@ -345,11 +386,11 @@ public class MainFrame extends javax.swing.JFrame {
             if (canGoSouth(place1)) {
                 moveSouth(place1);
             } else {
-                if (canGoNorth(place1)) {
-                    moveNorth(place1);
+                if (canGoWest(place1)) {
+                    moveWest(place1);
                 } else {
-                    if (canGoWest(place1)) {
-                        moveWest(place1);
+                    if (canGoNorth(place1)) {
+                        moveNorth(place1);
                     } else {
                         if (canGoEast(place1)) {
                             moveEast(place1);
